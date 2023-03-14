@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">V2</string>
+    <string name="gato">Gato</string>
+    <string name="gato_con_botas">Gato con Botas</string>
 </resources>
