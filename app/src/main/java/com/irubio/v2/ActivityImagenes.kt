@@ -1,60 +1,42 @@
 package com.irubio.v2
 
 import MyAdapter
-import android.content.Intent
+import MyAdapter_Images
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.irubio.v2.Data.Imagen
 import com.irubio.v2.Data.Usuario
 import java.util.*
-import kotlin.random.Random
 
-
-class MainActivity : AppCompatActivity() {
+class ActivityImagenes : AppCompatActivity() {
 
     private var tts: TextToSpeech? = null
     private var listo: Boolean? = false
     private lateinit var recyclerView: RecyclerView
-    private lateinit var myAdapter: MyAdapter
-    var imagenes: ArrayList<Int>? = null
-
-
-
+    private lateinit var myAdapter: MyAdapter_Images
+    var imagenes = ArrayList<Imagen>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycle)
-        val user1 = Usuario(0,"Nacho123","123","Nacho","Nosk",R.drawable.user_verde,imagenes)
-        val user2 = Usuario(1,"oliver123","123","Oliver","Nosk",R.drawable.user_naranja,imagenes)
-        val user3 = Usuario(2,"li13323","123","Prueba","Nosk",R.drawable.user_naranja_pollo,imagenes)
-        val user4 = Usuario(3,"oo33123","123","Prueba","Nosk",R.drawable.user_negro,imagenes)
+        setContentView(R.layout.activity_recycle_imagenes)
+        val imagen1 = Imagen(0,R.drawable.gato,"Gato","Gato")
+        val imagen2 = Imagen(1,R.drawable.conejo,"Conejo","Conejo")
+        val imagen3 = Imagen(2,R.drawable.perro,"Perro","Perro")
+        val imagen4 = Imagen(3,R.drawable.vaca,"Vaca","Vaca")
+        imagenes.add(imagen1)
+        imagenes.add(imagen2)
+        imagenes.add(imagen3)
+        imagenes.add(imagen4)
 
-        imagenes?.add(1)
-        imagenes?.add(2)
-        imagenes?.add(3)
-        imagenes?.add(4)
-
-        for (i in 0..3){
-         imagenes?.add(
-            Random.nextInt(0,
-            4))
-        }
-        val myData = listOf(user1,user2,user3,user4)
         recyclerView = findViewById(R.id.my_recycler_view)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-        myAdapter = MyAdapter(myData) { position ->
-            val intent = Intent(this, ActivityImagenes::class.java)
-            val b = Bundle()
-            b.putInt("lista", 1)
-            intent.putExtras(b)
-            startActivity(intent)
-            finish()
-
-            //val b = getIntent().extras
-            //var value = -1 // or other values if (b != null) value = b.getInt("key")
+        myAdapter = MyAdapter_Images(imagenes) { position ->
+            Toast.makeText(this, "Clicked item ${imagenes[position].titulo}", Toast.LENGTH_SHORT).show()
         }
         recyclerView.adapter = myAdapter
     }

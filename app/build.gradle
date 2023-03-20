@@ -67,4 +67,6 @@ dependencies {
 
     //Shadows
     implementation 'com.github.dmytrodanylyk.shadow-layout:library:1.0.1'
+
+    implementation "androidx.cardview:cardview:1.0.0"
 }

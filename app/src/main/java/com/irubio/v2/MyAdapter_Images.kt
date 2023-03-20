@@ -3,13 +3,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.irubio.v2.Data.Imagen
 import com.irubio.v2.Data.Usuario
 import com.irubio.v2.R
 
-class MyAdapter(
-    private val data: List<Usuario>,
+class MyAdapter_Images(
+    private val data: List<Imagen>,
     private val onItemClick: (position: Int) -> Unit
-) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MyAdapter_Images.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.image_view)
@@ -20,8 +21,8 @@ class MyAdapter(
             }
         }
 
-        fun bind(item: Usuario) {
-            imageView.setImageResource(item.fotoPerfil)
+        fun bind(item: Imagen) {
+            imageView.setImageResource(item.imagen)
         }
     }
 
