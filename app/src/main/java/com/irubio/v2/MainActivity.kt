@@ -3,6 +3,7 @@ package com.irubio.v2
 import MyAdapter
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,30 +14,29 @@ class MainActivity : AppCompatActivity() {
 
     private var tts: TextToSpeech? = null
     private var listo: Boolean? = false
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var myAdapter: MyAdapter
+    private val myData = listOf(
+        R.drawable.gato,
+        R.drawable.gato,
+        R.drawable.gato,
+        R.drawable.gato,
+        R.drawable.gato)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycle)
 
-        val data = listOf(
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-            R.drawable.gato,
-        )
 
-        val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+
+        recyclerView = findViewById(R.id.my_recycler_view)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        val adapter = MyAdapter(data)
-        val llm = LinearLayoutManager(this)
-        llm.setOrientation(LinearLayoutManager.VERTICAL)
-        recyclerView.setLayoutManager(llm)
-        recyclerView.setAdapter(adapter)
-            adapter.notifyDataSetChanged()
+
+        myAdapter = MyAdapter(myData) { position ->
+            // Handle item click here
+            Toast.makeText(this, "Clicked item $position", Toast.LENGTH_SHORT).show()
+        }
+        recyclerView.adapter = myAdapter
     }
 
 
