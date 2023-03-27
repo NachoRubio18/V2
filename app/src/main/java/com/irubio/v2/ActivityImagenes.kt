@@ -2,6 +2,7 @@ package com.irubio.v2
 
 import MyAdapter
 import MyAdapter_Images
+import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
@@ -36,9 +37,20 @@ class ActivityImagenes : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         myAdapter = MyAdapter_Images(imagenes) { position ->
-            Toast.makeText(this, "Clicked item ${imagenes[position].titulo}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Clicked item ${imagenes[position].titulo}", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, ActivityDictado::class.java)
+            intent.putExtra("idImagen", imagenes[position].idImagen)
+            intent.putExtra("titulo", imagenes[position].titulo)
+            intent.putExtra("palabra", imagenes[position].palabra)
+            startActivity(intent)
+            //finish()
         }
         recyclerView.adapter = myAdapter
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
 

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             b.putInt("lista", 1)
             intent.putExtras(b)
             startActivity(intent)
-            finish()
+            //finish()
 
             //val b = getIntent().extras
             //var value = -1 // or other values if (b != null) value = b.getInt("key")
